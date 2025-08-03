@@ -1,0 +1,40 @@
+{
+	"format_version": 2,
+	"header": {
+		"name": "ランダムスキルサバイバル",
+		"description": "毎日ランダムでスキルが変わるサバイバルアドオン",
+		"uuid": "a90ec841-c1c2-4080-ad57-9cef655b93e8",
+		"version": [1, 0, 0],
+		"min_engine_version": [1, 21, 90]
+	},
+	"modules": [
+		{
+			"type":"data",
+			"description":"behavior_module",
+			"version":[1, 0, 0],
+			"uuid":"687e7fe4-e16e-417f-88cf-5fd44015a8ce"
+		},
+		{
+			"description": "Script API module",
+			"language": "javascript",
+			"type": "script",
+			"uuid": "5a68707f-a64e-4e10-a99d-51199ba34e39",
+			"version": [1, 0, 0],
+			"entry": "scripts/main.js"
+		}
+	],
+	"dependencies": [
+		{
+			"module_name": "@minecraft/server",
+			"version": "2.0.0"
+		},
+		{
+			"module_name": "@minecraft/server-ui",
+			"version": "2.0.0"
+		}
+	],
+	"metadata": {
+		"authors": ["altivelis"],
+    "license": "この名前さえ残していれば改造、改変OK 2次配布NG"
+	}
+}
