@@ -9,6 +9,7 @@ mc.system.runInterval(() => {
   if (mc.world.getTimeOfDay() == 0) {
     players.forEach(player => {
       setRandomSkill(player);
+      player.setDynamicProperty("day", mc.world.getDay())
     });
   }
 
@@ -18,6 +19,17 @@ mc.system.runInterval(() => {
       setRandomSkill(player);
     }
   })
+})
+
+// ワールド参加時、日が変わっている場合はスキルをリセットする
+mc.world.afterEvents.playerSpawn.subscribe(data=>{
+  const player = data.player;
+  if(!data.initialSpawn) return; // 初回スポーン時のみ実行
+  const lastDay = player.getDynamicProperty("day");
+  if(lastDay === undefined || lastDay < mc.world.getDay()) {
+    setRandomSkill(player);
+    player.setDynamicProperty("day", mc.world.getDay());
+  }
 })
 
 export function setRandomSkill(player) {
