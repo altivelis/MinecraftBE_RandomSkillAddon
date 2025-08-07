@@ -28,5 +28,15 @@ export const skillList = [
     id: "random_block",
     name: "奇跡の足跡",
     description: "歩いた場所にランダムなブロックを生成する"
+  },
+  {
+    id: "loot_master",
+    name: "剥ぎ取り名人",
+    description: "モブに攻撃したとき、倒した際のドロップアイテムがドロップする。"
+  },
+  {
+    id: "gojo_satoru",
+    name: "無下限呪術",
+    description: "近くのモブを反発させ、近づくことができない。"
   }
 ]

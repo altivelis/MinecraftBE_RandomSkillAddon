@@ -16,6 +16,8 @@ import "./explodeProjectile";
 import "./superSmash";
 import "./strongSmell";
 import "./randomBlock";
+import "./lootMaster";
+import "./gojoSatoru";
 
 // 新しいスキルの例：
 // import "./newSkillName";
