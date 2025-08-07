@@ -1,0 +1,110 @@
+import * as mc from "@minecraft/server";
+import * as ui from "@minecraft/server-ui";
+
+mc.world.afterEvents.worldLoad.subscribe(() => {
+  // 設定を初期化
+  if(mc.world.getDynamicProperty("showSkillMessage") === undefined) {
+    mc.world.setDynamicProperty("showSkillMessage", true);
+  }
+  if(mc.world.getDynamicProperty("doubleJumpPower") === undefined) {
+    mc.world.setDynamicProperty("doubleJumpPower", 7);
+  }
+  if(mc.world.getDynamicProperty("explodeProjectilePower") === undefined) {
+    mc.world.setDynamicProperty("explodeProjectilePower", 4);
+  }
+  if(mc.world.getDynamicProperty("superSmashPower") === undefined) {
+    mc.world.setDynamicProperty("superSmashPower", 10);
+  }
+  if(mc.world.getDynamicProperty("strongSmellPower") === undefined) {
+    mc.world.setDynamicProperty("strongSmellPower", 5);
+  }
+})
+
+mc.system.afterEvents.scriptEventReceive.subscribe(data => {
+  if (data.id == "alt:setting") {
+    const player = data.sourceEntity;
+    if (!(player instanceof mc.Player)) return;
+
+    const settingForm = new ui.ModalFormData()
+      .title("設定")
+      .toggle("スキルのメッセージを表示", {defaultValue: mc.world.getDynamicProperty("showSkillMessage"), tooltip: "スキルが変わった際にスキルの内容を知らせます"})
+      .slider("2段ジャンプの強さ", 5, 20, {valueStep: 1, defaultValue: mc.world.getDynamicProperty("doubleJumpPower")})
+      .slider("爆弾の呪いの爆発力", 1, 10, {valueStep: 1, defaultValue: mc.world.getDynamicProperty("explodeProjectilePower")})
+      .slider("スーパースマッシュの強さ", 2, 20, {valueStep: 1, defaultValue: mc.world.getDynamicProperty("superSmashPower")})
+      .slider("強烈な体臭の範囲", 1, 10, {valueStep: 1, defaultValue: mc.world.getDynamicProperty("strongSmellPower")});
+    
+    // 設定フォームを表示
+    settingForm.show(player).then(res=>{
+      if (res.canceled) return; // キャンセルされた場合は何もしない
+      mc.world.setDynamicProperty("showSkillMessage", res.formValues[0]);
+      mc.world.setDynamicProperty("doubleJumpPower", res.formValues[1]);
+      mc.world.setDynamicProperty("explodeProjectilePower", res.formValues[2]);
+      mc.world.setDynamicProperty("superSmashPower", res.formValues[3]);
+      mc.world.setDynamicProperty("strongSmellPower", res.formValues[4]);
+
+      // 設定が更新されたことをプレイヤーに通知
+      player.sendMessage(
+        "設定が更新されました。\n" +
+        `スキルのメッセージ表示: ${res.formValues[0] ? "有効" : "無効"}\n` +
+        `2段ジャンプの強さ: ${res.formValues[1]} (デフォルト: 7)\n` +
+        `爆弾の呪いの爆発力: ${res.formValues[2]} (デフォルト: 4)\n` +
+        `スーパースマッシュの強さ: ${res.formValues[3]} (デフォルト: 10)\n` +
+        `強烈な体臭の範囲: ${res.formValues[4]} (デフォルト: 5)\n`
+      )
+    })
+  }
+})
+
+mc.system.beforeEvents.startup.subscribe(data=>{
+  /**
+   * 設定コマンドを定義
+   * @type {mc.CustomCommand}
+   */
+  const settingCommand = {
+    name: "alt:setting",
+    description: "スキルの設定を変更する",
+    permissionLevel: mc.CommandPermissionLevel.Admin,
+    mandatoryParameters: [],
+    optionalParameters: [],
+  }
+  data.customCommandRegistry.registerCommand(settingCommand, (origin) => {
+    if (origin.sourceEntity?.typeId !== "minecraft:player") {
+      return {
+        status: mc.CustomCommandStatus.Failure,
+        message: "このコマンドはプレイヤーのみが実行できます。"
+      }
+    }
+    const player = origin.sourceEntity;
+    // 設定フォームを表示
+    const settingForm = new ui.ModalFormData()
+      .title("設定")
+      .toggle("スキルのメッセージを表示", {defaultValue: mc.world.getDynamicProperty("showSkillMessage"), tooltip: "スキルが変わった際にスキルの内容を知らせます"})
+      .slider("2段ジャンプの強さ", 5, 20, {valueStep: 1, defaultValue: mc.world.getDynamicProperty("doubleJumpPower")})
+      .slider("爆弾の呪いの爆発力", 1, 10, {valueStep: 1, defaultValue: mc.world.getDynamicProperty("explodeProjectilePower")})
+      .slider("スーパースマッシュの強さ", 2, 20, {valueStep: 1, defaultValue: mc.world.getDynamicProperty("superSmashPower")})
+      .slider("強烈な体臭の範囲", 1, 10, {valueStep: 1, defaultValue: mc.world.getDynamicProperty("strongSmellPower")});
+    mc.system.run(()=>{
+      settingForm.show(player).then(res => {
+        if (res.canceled) return; // キャンセルされた場合は何もしない
+        mc.world.setDynamicProperty("showSkillMessage", res.formValues[0]);
+        mc.world.setDynamicProperty("doubleJumpPower", res.formValues[1]);
+        mc.world.setDynamicProperty("explodeProjectilePower", res.formValues[2]);
+        mc.world.setDynamicProperty("superSmashPower", res.formValues[3]);
+        mc.world.setDynamicProperty("strongSmellPower", res.formValues[4]);
+        // 設定が更新されたことをプレイヤーに通知
+        player.sendMessage(
+          "設定が更新されました。\n" +
+          `スキルのメッセージ表示: ${res.formValues[0] ? "有効" : "無効"}\n` +
+          `2段ジャンプの強さ: ${res.formValues[1]} (デフォルト: 7)\n` +
+          `爆弾の呪いの爆発力: ${res.formValues[2]} (デフォルト: 4)\n` +
+          `スーパースマッシュの強さ: ${res.formValues[3]} (デフォルト: 10)\n` +
+          `強烈な体臭の範囲: ${res.formValues[4]} (デフォルト: 5)\n`
+        )
+      })
+    })
+    return {
+      status: mc.CustomCommandStatus.Success,
+      message: "設定フォームを表示しました。"
+    }
+  })
+})

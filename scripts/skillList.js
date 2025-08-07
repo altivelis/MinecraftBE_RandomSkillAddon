@@ -8,5 +8,25 @@ export const skillList = [
     id: "random_effect",
     name: "ランダムポーション",
     description: "常にランダムなポーション効果を得る"
+  },
+  {
+    id: "explode_projectile",
+    name: "爆弾の呪い",
+    description: "あなたの放つ飛び道具は爆発する。"
+  },
+  {
+    id: "super_smash",
+    name: "スーパースマッシュ",
+    description: "殴った相手を吹っ飛ばす。"
+  },
+  {
+    id: "strong_smell",
+    name: "強烈な体臭",
+    description: "近くのモブは匂いに耐えられない。"
+  },
+  {
+    id: "random_block",
+    name: "奇跡の足跡",
+    description: "歩いた場所にランダムなブロックを生成する"
   }
 ]

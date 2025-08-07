@@ -1,8 +1,7 @@
 import * as mc from "@minecraft/server";
 import { skillList } from "./skillList";
-import "./setting";
-import "./skills/doubleJump";
-import "./skills/randomEffect";
+import "./skills/index";
+import "./commands/index";
 
 mc.system.runInterval(() => {
   const players = mc.world.getPlayers();
