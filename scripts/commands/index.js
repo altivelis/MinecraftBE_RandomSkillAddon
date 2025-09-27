@@ -12,6 +12,8 @@
 // ===============================
 import "./setSkill";
 import "./setting";
+import "./skillList";
+import "./skillInfo";
 
 // 新しいコマンドの例：
 // import "./newCommandName";

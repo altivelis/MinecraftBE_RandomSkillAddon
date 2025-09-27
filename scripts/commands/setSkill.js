@@ -8,9 +8,10 @@ mc.system.beforeEvents.startup.subscribe(data=>{
    * @type {mc.CustomCommand}
    */
   const setSkillCommand = {
+    cheatsRequired: true,
     name: "alt:setskill",
     description: "現在のスキルを変更する",
-    permissionLevel: mc.CommandPermissionLevel.Admin,
+    permissionLevel: mc.CommandPermissionLevel.GameDirectors,
     mandatoryParameters: [],
     optionalParameters: [
       {name: "skill", type: mc.CustomCommandParamType.String},

@@ -12,13 +12,6 @@ mc.system.runInterval(() => {
       player.setDynamicProperty("day", mc.world.getDay())
     });
   }
-
-  players.forEach(player=>{
-    // プレイヤーがスキルを持っていない場合、ランダムなスキルを設定する
-    if(player.getDynamicProperty("skill") == undefined) {
-      setRandomSkill(player);
-    }
-  })
 })
 
 // ワールド参加時、日が変わっている場合はスキルをリセットする

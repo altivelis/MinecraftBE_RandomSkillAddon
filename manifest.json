@@ -1,11 +1,11 @@
 {
 	"format_version": 2,
 	"header": {
-		"name": "ランダムスキルサバイバル",
+		"name": "ランダムスキルサバイバルv1.0",
 		"description": "毎日ランダムでスキルが変わるサバイバルアドオン",
 		"uuid": "a90ec841-c1c2-4080-ad57-9cef655b93e8",
 		"version": [1, 0, 0],
-		"min_engine_version": [1, 21, 90]
+		"min_engine_version": [1, 21, 100]
 	},
 	"modules": [
 		{
@@ -35,6 +35,7 @@
 	],
 	"metadata": {
 		"authors": ["altivelis"],
-    "license": "この名前さえ残していれば改造、改変OK 2次配布NG"
+    "license": "この名前さえ残していれば改造、改変OK 2次配布NG",
+		"product_type": "addon"
 	}
 }

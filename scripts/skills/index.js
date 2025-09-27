@@ -18,11 +18,15 @@ import "./strongSmell";
 import "./randomBlock";
 import "./lootMaster";
 import "./gojoSatoru";
+import "./chargeJump";
+import "./vampire";
+import "./magician";
+import "./randomDrop";
+import "./randomLoot";
+import "./natureBlessing";
+import "./minerInstinct";
+import "./eatTeleport";
+import "./areaAttack";
 
 // 新しいスキルの例：
 // import "./newSkillName";
-
-// ===============================
-// 注意：doubleJumpImproved.jsは代替実装なので通常はコメントアウト
-// import "./doubleJumpImproved";
-// ===============================

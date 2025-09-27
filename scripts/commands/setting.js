@@ -4,7 +4,7 @@ import * as ui from "@minecraft/server-ui";
 mc.world.afterEvents.worldLoad.subscribe(() => {
   // 設定を初期化
   if(mc.world.getDynamicProperty("showSkillMessage") === undefined) {
-    mc.world.setDynamicProperty("showSkillMessage", true);
+    mc.world.setDynamicProperty("showSkillMessage", false);
   }
   if(mc.world.getDynamicProperty("doubleJumpPower") === undefined) {
     mc.world.setDynamicProperty("doubleJumpPower", 7);
@@ -21,6 +21,12 @@ mc.world.afterEvents.worldLoad.subscribe(() => {
   if(mc.world.getDynamicProperty("satoruLength") === undefined) {
     mc.world.setDynamicProperty("satoruLength", 3);
   }
+  if(mc.world.getDynamicProperty("nature_blessing_radius") === undefined) {
+    mc.world.setDynamicProperty("nature_blessing_radius", 5);
+  }
+  if(mc.world.getDynamicProperty("miner_instinct_radius") === undefined) {
+    mc.world.setDynamicProperty("miner_instinct_radius", 10);
+  }
 })
 
 mc.system.beforeEvents.startup.subscribe(data=>{
@@ -29,11 +35,13 @@ mc.system.beforeEvents.startup.subscribe(data=>{
    * @type {mc.CustomCommand}
    */
   const settingCommand = {
+    cheatsRequired: false,
     name: "alt:setting",
     description: "スキルの設定を変更する",
-    permissionLevel: mc.CommandPermissionLevel.Admin,
+    permissionLevel: mc.CommandPermissionLevel.Host,
     mandatoryParameters: [],
     optionalParameters: [],
+    cheatsRequired: false
   }
   data.customCommandRegistry.registerCommand(settingCommand, (origin) => {
     if (origin.sourceEntity?.typeId !== "minecraft:player") {
@@ -51,7 +59,9 @@ mc.system.beforeEvents.startup.subscribe(data=>{
       .slider("爆弾の呪いの爆発力", 1, 10, {valueStep: 1, defaultValue: mc.world.getDynamicProperty("explodeProjectilePower")})
       .slider("スーパースマッシュの強さ", 2, 20, {valueStep: 1, defaultValue: mc.world.getDynamicProperty("superSmashPower")})
       .slider("強烈な体臭の範囲", 1, 10, {valueStep: 1, defaultValue: mc.world.getDynamicProperty("strongSmellPower")})
-      .slider("無下限呪術の範囲", 1, 10, {valueStep: 1, defaultValue: mc.world.getDynamicProperty("satoruLength")});
+      .slider("無下限呪術の範囲", 1, 10, {valueStep: 1, defaultValue: mc.world.getDynamicProperty("satoruLength")})
+      .slider("自然の恵みの範囲", 1, 10, {valueStep: 1, defaultValue: mc.world.getDynamicProperty("nature_blessing_radius")})
+      .slider("鉱夫の直感の範囲", 5, 20, {valueStep: 1, defaultValue: mc.world.getDynamicProperty("miner_instinct_radius")});
     mc.system.run(()=>{
       settingForm.show(player).then(res => {
         if (res.canceled) return; // キャンセルされた場合は何もしない
@@ -61,6 +71,8 @@ mc.system.beforeEvents.startup.subscribe(data=>{
         mc.world.setDynamicProperty("superSmashPower", res.formValues[3]);
         mc.world.setDynamicProperty("strongSmellPower", res.formValues[4]);
         mc.world.setDynamicProperty("satoruLength", res.formValues[5]);
+        mc.world.setDynamicProperty("nature_blessing_radius", res.formValues[6]);
+        mc.world.setDynamicProperty("miner_instinct_radius", res.formValues[7]);
         // 設定が更新されたことをプレイヤーに通知
         player.sendMessage(
           "設定が更新されました。\n" +
@@ -69,7 +81,9 @@ mc.system.beforeEvents.startup.subscribe(data=>{
           `爆弾の呪いの爆発力: ${res.formValues[2]} (デフォルト: 4)\n` +
           `スーパースマッシュの強さ: ${res.formValues[3]} (デフォルト: 10)\n` +
           `強烈な体臭の範囲: ${res.formValues[4]} (デフォルト: 5)\n` +
-          `無下限呪術の範囲: ${res.formValues[5]} (デフォルト: 3)\n`
+          `無下限呪術の範囲: ${res.formValues[5]} (デフォルト: 3)\n` +
+          `自然の恵みの範囲: ${res.formValues[6]} (デフォルト: 5)\n` +
+          `鉱夫の直感の範囲: ${res.formValues[7]} (デフォルト: 10)\n`
         )
       })
     })
