@@ -83,5 +83,10 @@ export const skillList = [
     id: "area_attack",
     name: "範囲攻撃",
     description: "攻撃したとき、周りのモブにもダメージを与える。"
+  },
+  {
+    id: "infinity_food",
+    name: "無限食料",
+    description: "食べ物を食べても減らない。"
   }
 ]

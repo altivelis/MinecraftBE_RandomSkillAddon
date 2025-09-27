@@ -27,6 +27,7 @@ import "./natureBlessing";
 import "./minerInstinct";
 import "./eatTeleport";
 import "./areaAttack";
+import "./infinityFood";
 
 // 新しいスキルの例：
 // import "./newSkillName";
