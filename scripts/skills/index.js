@@ -28,6 +28,8 @@ import "./minerInstinct";
 import "./eatTeleport";
 import "./areaAttack";
 import "./infinityFood";
+import "./cutAll";
+import "./mineAll";
 
 // 新しいスキルの例：
 // import "./newSkillName";

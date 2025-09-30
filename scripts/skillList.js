@@ -88,5 +88,15 @@ export const skillList = [
     id: "infinity_food",
     name: "無限食料",
     description: "食べ物を食べても減らない。"
+  },
+  {
+    id: "cut_all",
+    name: "一括伐採",
+    description: "木を一括で伐採できる。"
+  },
+  {
+    id: "mine_all",
+    name: "一括採掘",
+    description: "鉱石を一括で採掘できる。"
   }
 ]

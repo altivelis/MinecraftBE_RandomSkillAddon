@@ -3,6 +3,7 @@ import { getSkill } from "../main";
 
 mc.world.afterEvents.entitySpawn.subscribe(data => {
   if(data.entity.typeId !== "minecraft:item") return;
+  if(data.entity.isValid == false) return;
   let amount = data.entity.getComponent(mc.EntityItemComponent.componentId).itemStack.amount;
   // mc.world.sendMessage(`${data.entity.location.x}, ${data.entity.location.y}, ${data.entity.location.z}にアイテムが生成されました。`);
   /**
