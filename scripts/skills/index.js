@@ -30,6 +30,7 @@ import "./areaAttack";
 import "./infinityFood";
 import "./cutAll";
 import "./mineAll";
+import "./areaHeal";
 
 // 新しいスキルの例：
 // import "./newSkillName";

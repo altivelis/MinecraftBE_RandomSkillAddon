@@ -98,5 +98,10 @@ export const skillList = [
     id: "mine_all",
     name: "一括採掘",
     description: "鉱石を一括で採掘できる。"
+  },
+  {
+    id: "area_heal",
+    name: "エリアヒール",
+    description: "周りのプレイヤーを回復する。"
   }
 ]
