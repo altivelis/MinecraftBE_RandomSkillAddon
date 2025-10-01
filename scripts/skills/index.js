@@ -31,6 +31,7 @@ import "./infinityFood";
 import "./cutAll";
 import "./mineAll";
 import "./areaHeal";
+import "./rpgPlayer";
 
 // 新しいスキルの例：
 // import "./newSkillName";

@@ -103,5 +103,10 @@ export const skillList = [
     id: "area_heal",
     name: "エリアヒール",
     description: "周りのプレイヤーを回復する。"
+  },
+  {
+    id: "rpg_player",
+    name: "RPGプレイヤー",
+    description: "見ているエンティティの体力を表示する。"
   }
 ]
