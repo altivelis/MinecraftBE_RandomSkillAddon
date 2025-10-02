@@ -54,15 +54,9 @@ export function getSkill(player) {
 }
 
 mc.system.afterEvents.scriptEventReceive.subscribe(data=>{
-  if(data.id == "altivelis:getskill") {
+  if(data.id == "altivelis:test") {
     const player = data.sourceEntity;
-    const skill = getSkill(player);
     if(!(player instanceof mc.Player)) return;
-    if (skill) {
-      player.sendMessage(`あなたのスキル: ${skill.name} - ${skill.description}`);
-    }
-    else {
-      player.sendMessage("スキルが設定されていません。");
-    }
+    player.applyImpulse({x:0, y:10, z:0});
   }
 })
