@@ -10,19 +10,14 @@ mc.system.runInterval(() => {
     // プレイヤーが「無下限呪術」スキルを持っている場合の処理
     const nearbyEntities = player.dimension.getEntities({location: player.location, maxDistance: power});
     nearbyEntities.forEach(entity => {
-      if (entity.typeId !== "minecraft:player") {
-        // プレイヤー以外のエンティティを反発させる
-        const vector = getVectorBetweenEntities(player, entity);
-        entity.applyImpulse({
-          x: vector.x, // 反発力の強さを調整
-          y: vector.y,
-          z: vector.z
-        });
-      }else{
-        if (entity === player) return; // 自分自身には適用しない
-        const vector = getVectorBetweenEntities(player, entity);
-        entity.applyKnockback({x: vector.x, z: vector.z}, vector.y);
-      }
+      if (entity.id === player.id) return; // 自分自身には適用しない
+      // プレイヤー以外のエンティティを反発させる
+      const vector = getVectorBetweenEntities(player, entity);
+      entity.applyImpulse({
+        x: vector.x, // 反発力の強さを調整
+        y: vector.y,
+        z: vector.z
+      });
     });
   });
 })
