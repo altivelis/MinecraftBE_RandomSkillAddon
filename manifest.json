@@ -1,11 +1,11 @@
 {
 	"format_version": 2,
 	"header": {
-		"name": "ランダムスキルサバイバルv1.0",
+		"name": "ランダムスキルサバイバルv2.0",
 		"description": "毎日ランダムでスキルが変わるサバイバルアドオン",
 		"uuid": "a90ec841-c1c2-4080-ad57-9cef655b93e8",
-		"version": [1, 0, 0],
-		"min_engine_version": [1, 21, 100]
+		"version": [2, 0, 0],
+		"min_engine_version": [1, 21, 111]
 	},
 	"modules": [
 		{
