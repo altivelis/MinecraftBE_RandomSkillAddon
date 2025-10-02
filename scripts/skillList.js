@@ -117,6 +117,6 @@ export const skillList = [
   {
     id: "magnet_body",
     name: "マグネットボディ",
-    description: "近くのエンティティを引き寄せる。"
+    description: "しゃがんでいる間近くのエンティティを引き寄せる。"
   }
 ]
