@@ -32,6 +32,8 @@ import "./cutAll";
 import "./mineAll";
 import "./areaHeal";
 import "./rpgPlayer";
+import "./scope";
+import "./magnetBody";
 
 // 新しいスキルの例：
 // import "./newSkillName";

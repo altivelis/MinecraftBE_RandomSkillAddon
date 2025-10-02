@@ -28,7 +28,7 @@ mc.system.runInterval(() => {
  * @param {mc.Entity | mc.Player} toEntity 
  * @return {{x: number, y: number, z: number}}
  */
-function getVectorBetweenEntities(fromEntity, toEntity) {
+export function getVectorBetweenEntities(fromEntity, toEntity) {
   let fp = fromEntity.location;
   let tp = toEntity.location;
   let v = {

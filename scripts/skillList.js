@@ -108,5 +108,15 @@ export const skillList = [
     id: "rpg_player",
     name: "RPGプレイヤー",
     description: "見ているエンティティの体力を表示する。"
+  },
+  {
+    id: "scope",
+    name: "スコープ",
+    description: "しゃがんでいる間、ズームする。"
+  },
+  {
+    id: "magnet_body",
+    name: "マグネットボディ",
+    description: "近くのエンティティを引き寄せる。"
   }
 ]
