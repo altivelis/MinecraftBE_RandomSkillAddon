@@ -80,7 +80,7 @@ mc.world.beforeEvents.playerBreakBlock.subscribe(data => {
       // 破壊処理
       data.player.runCommand(`loot spawn ${block.location.x} ${block.location.y} ${block.location.z} mine ${b.location.x} ${b.location.y} ${b.location.z} mainhand`);
       let pos = b.bottomCenter();
-      b.dimension.spawnParticle("minecraft:crop_growth_emitter", {...pos, y: pos.y + 0.5});
+      b.dimension.spawnParticle("minecraft:villager_happy", {...pos, y: pos.y + 0.5});
       b.setType("minecraft:air");
     });
   });
