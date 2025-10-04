@@ -15,6 +15,7 @@ mc.world.afterEvents.entityHitEntity.subscribe(data => {
 mc.world.afterEvents.entitySpawn.subscribe(data => {
   let {cause, entity} = data;
   if (cause !== mc.EntityInitializationCause.Spawned) return;
+  if (!entity.isValid) return;
   let pComponent = entity.getComponent(mc.EntityProjectileComponent.componentId);
   if (!pComponent) return;
   let shooter = pComponent.owner;
