@@ -118,5 +118,10 @@ export const skillList = [
     id: "magnet_body",
     name: "マグネットボディ",
     description: "しゃがんでいる間近くのエンティティを引き寄せる。"
+  },
+  {
+    id: "potion_hand",
+    name: "ポーションハンド",
+    description: "攻撃するとランダムなポーション効果を与える。"
   }
 ]

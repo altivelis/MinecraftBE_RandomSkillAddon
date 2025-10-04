@@ -34,6 +34,7 @@ import "./areaHeal";
 import "./rpgPlayer";
 import "./scope";
 import "./magnetBody";
+import "./potionHand";
 
 // 新しいスキルの例：
 // import "./newSkillName";
