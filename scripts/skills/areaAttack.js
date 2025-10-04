@@ -9,7 +9,7 @@ mc.world.afterEvents.entityHitEntity.subscribe(data => {
     if (data2.hurtEntity.id != hitEntity.id) return;
     if (data2.damageSource.cause !== mc.EntityDamageCause.entityAttack) return;
     if (data2.damageSource.damagingEntity.id != damagingEntity.id) return;
-    let entities = damagingEntity.dimension.getEntities({location: hitEntity.location, maxDistance: 3});
+    let entities = damagingEntity.dimension.getEntities({location: hitEntity.location, maxDistance: mc.world.getDynamicProperty("area_attack_range") || 3});
     entities.forEach(entity => {
       if (entity.id == damagingEntity.id) return;
       if (entity.id == hitEntity.id) return;

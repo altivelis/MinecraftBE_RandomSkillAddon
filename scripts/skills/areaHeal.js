@@ -11,7 +11,7 @@ mc.system.runInterval(() => {
     const currentTick = mc.system.currentTick;
     if (currentTick % 5 != 0) return;
 
-    const nearbyPlayers = player.dimension.getPlayers({location: player.location, maxDistance: 5});
+    const nearbyPlayers = player.dimension.getPlayers({location: player.location, maxDistance: mc.world.getDynamicProperty("area_heal_radius") || 5});
 
     nearbyPlayers.forEach(target =>{
       let health = target.getComponent(mc.EntityHealthComponent.componentId);

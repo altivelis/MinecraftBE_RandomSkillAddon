@@ -8,7 +8,7 @@ mc.system.runInterval(() => {
     let skill = getSkill(player);
     if (!skill || skill.id !== "magnet_body") return;
     if (!player.isSneaking) return;
-    const nearbyEntities = player.dimension.getEntities({location: player.location, maxDistance: 5});
+    const nearbyEntities = player.dimension.getEntities({location: player.location, maxDistance: mc.world.getDynamicProperty("magnet_body_radius") || 5});
     nearbyEntities.forEach(entity => {
       if (entity.id === player.id) return; // 自分自身には適用しない
       const vector = getVectorBetweenEntities(entity, player);

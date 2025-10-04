@@ -27,6 +27,15 @@ mc.world.afterEvents.worldLoad.subscribe(() => {
   if(mc.world.getDynamicProperty("miner_instinct_radius") === undefined) {
     mc.world.setDynamicProperty("miner_instinct_radius", 10);
   }
+  if(mc.world.getDynamicProperty("area_attack_range") === undefined) {
+    mc.world.setDynamicProperty("area_attack_range", 3);
+  }
+  if(mc.world.getDynamicProperty("area_heal_radius") === undefined) {
+    mc.world.setDynamicProperty("area_heal_radius", 5);
+  }
+  if(mc.world.getDynamicProperty("magnet_body_radius") === undefined) {
+    mc.world.setDynamicProperty("magnet_body_radius", 5);
+  }
 })
 
 mc.system.beforeEvents.startup.subscribe(data=>{
@@ -54,14 +63,17 @@ mc.system.beforeEvents.startup.subscribe(data=>{
     // 設定フォームを表示
     const settingForm = new ui.ModalFormData()
       .title("設定")
-      .toggle("スキルのメッセージを表示", {defaultValue: mc.world.getDynamicProperty("showSkillMessage"), tooltip: "スキルが変わった際にスキルの内容を知らせます"})
+      .toggle("スキルのメッセージを表示", {defaultValue: mc.world.getDynamicProperty("showSkillMessage"), tooltip: "スキルが変わった際に内容が分かります"})
       .slider("2段ジャンプの強さ", 5, 20, {valueStep: 1, defaultValue: mc.world.getDynamicProperty("doubleJumpPower")})
       .slider("爆弾の呪いの爆発力", 1, 10, {valueStep: 1, defaultValue: mc.world.getDynamicProperty("explodeProjectilePower")})
       .slider("スーパースマッシュの強さ", 2, 20, {valueStep: 1, defaultValue: mc.world.getDynamicProperty("superSmashPower")})
       .slider("強烈な体臭の範囲", 1, 10, {valueStep: 1, defaultValue: mc.world.getDynamicProperty("strongSmellPower")})
       .slider("無下限呪術の範囲", 1, 10, {valueStep: 1, defaultValue: mc.world.getDynamicProperty("satoruLength")})
       .slider("自然の恵みの範囲", 1, 10, {valueStep: 1, defaultValue: mc.world.getDynamicProperty("nature_blessing_radius")})
-      .slider("鉱夫の直感の範囲", 5, 20, {valueStep: 1, defaultValue: mc.world.getDynamicProperty("miner_instinct_radius")});
+      .slider("鉱夫の直感の範囲", 5, 20, {valueStep: 1, defaultValue: mc.world.getDynamicProperty("miner_instinct_radius"), tooltip: "この設定は重くなる可能性があります"})
+      .slider("範囲攻撃の範囲", 1, 10, {valueStep: 1, defaultValue: mc.world.getDynamicProperty("area_attack_range"), })
+      .slider("エリアヒールの範囲", 1, 10, {valueStep: 1, defaultValue: mc.world.getDynamicProperty("area_heal_radius"), })
+      .slider("マグネットボディの範囲", 1, 10, {valueStep: 1, defaultValue: mc.world.getDynamicProperty("magnet_body_radius")})
     mc.system.run(()=>{
       settingForm.show(player).then(res => {
         if (res.canceled) return; // キャンセルされた場合は何もしない
@@ -73,6 +85,9 @@ mc.system.beforeEvents.startup.subscribe(data=>{
         mc.world.setDynamicProperty("satoruLength", res.formValues[5]);
         mc.world.setDynamicProperty("nature_blessing_radius", res.formValues[6]);
         mc.world.setDynamicProperty("miner_instinct_radius", res.formValues[7]);
+        mc.world.setDynamicProperty("area_attack_range", res.formValues[8]);
+        mc.world.setDynamicProperty("area_heal_radius", res.formValues[9]);
+        mc.world.setDynamicProperty("magnet_body_radius", res.formValues[10]);
         // 設定が更新されたことをプレイヤーに通知
         player.sendMessage(
           "設定が更新されました。\n" +
@@ -83,7 +98,10 @@ mc.system.beforeEvents.startup.subscribe(data=>{
           `強烈な体臭の範囲: ${res.formValues[4]} (デフォルト: 5)\n` +
           `無下限呪術の範囲: ${res.formValues[5]} (デフォルト: 3)\n` +
           `自然の恵みの範囲: ${res.formValues[6]} (デフォルト: 5)\n` +
-          `鉱夫の直感の範囲: ${res.formValues[7]} (デフォルト: 10)\n`
+          `鉱夫の直感の範囲: ${res.formValues[7]} (デフォルト: 10)\n` +
+          `範囲攻撃の範囲: ${res.formValues[8]} (デフォルト: 3)\n` +
+          `エリアヒールの範囲: ${res.formValues[9]} (デフォルト: 5)\n` +
+          `マグネットボディの範囲: ${res.formValues[10]} (デフォルト: 5)`
         )
       })
     })
