@@ -18,11 +18,12 @@ mc.system.runInterval(()=>{
       const direction = player.getViewDirection();
       player.dimension.spawnParticle("minecraft:wind_explosion_emitter", player.location);
       player.dimension.playSound("wind_charge.burst", player.location);
-      player.applyKnockback({
-        x: direction.x * jumpPower * 2,
-        z: direction.z * jumpPower * 2
-      },
-    direction.y * jumpPower);
+      // player.applyKnockback({
+      //   x: direction.x * jumpPower * 2,
+      //   z: direction.z * jumpPower * 2
+      // },
+      // direction.y * jumpPower);
+      player.applyImpulse({x: direction.x * jumpPower, y: direction.y * jumpPower, z: direction.z * jumpPower});
     }
     if (!player.isSneaking || !player.isOnGround) {
       player.setDynamicProperty("chargeJumpPower", 0); // しゃがんでいない場合はパワーをリセット

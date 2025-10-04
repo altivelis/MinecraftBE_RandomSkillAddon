@@ -20,7 +20,9 @@ mc.system.runInterval(() => {
     if(player.hasTag("jumping") && player.isJumping && !player.hasTag("doubleJump")) {
       let dir = player.getViewDirection();
       let velocity = player.getVelocity();
-      player.applyKnockback({x:dir.x * jumpPower * 0.5, z:dir.z * jumpPower * 0.5}, (1-velocity.y*0.5) * jumpPower );
+      // player.applyKnockback({x:dir.x * jumpPower * 0.5, z:dir.z * jumpPower * 0.5}, (1-velocity.y*0.5) * jumpPower );
+      player.clearVelocity();
+      player.applyImpulse({x:velocity.x * jumpPower * 2, y:jumpPower, z:velocity.z * jumpPower * 2});
       player.addTag("doubleJump");
       player.dimension.spawnParticle("minecraft:knockback_roar_particle", player.location);
       player.dimension.playSound("mob.bat.takeoff", player.location);
