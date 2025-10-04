@@ -1,5 +1,5 @@
 import * as mc from "@minecraft/server";
-import { getSkill } from "../main";
+import { hasSkill } from "../main";
 
 const searchBlockList = [
   "iron_ore",
@@ -70,8 +70,7 @@ mc.world.afterEvents.worldLoad.subscribe(()=>{
 mc.system.runInterval(() => {
   const radius = mc.world.getDynamicProperty("miner_instinct_radius");
   const players = mc.world.getPlayers().filter(player => {
-    const skill = getSkill(player);
-    return skill && skill.id === "miner_instinct";
+    return hasSkill(player, "miner_instinct");
   });
   if (players.length === 0) return;
   players.forEach(player => {

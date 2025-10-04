@@ -1,10 +1,10 @@
 import * as mc from "@minecraft/server";
-import { getSkill } from "../main";
+import { hasSkill } from "../main";
 
 mc.world.afterEvents.entityHitEntity.subscribe(data => {
   let {damagingEntity, hitEntity} = data;
   if (damagingEntity instanceof mc.Player === false) return;
-  if (!getSkill(damagingEntity) || getSkill(damagingEntity).id !== "area_attack") return;
+  if (!hasSkill(damagingEntity, "area_attack")) return;
   let event = mc.world.afterEvents.entityHurt.subscribe(data2 => {
     if (data2.hurtEntity.id != hitEntity.id) return;
     if (data2.damageSource.cause !== mc.EntityDamageCause.entityAttack) return;

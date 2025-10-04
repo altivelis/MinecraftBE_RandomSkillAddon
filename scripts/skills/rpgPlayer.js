@@ -1,11 +1,10 @@
 import * as mc from "@minecraft/server";
-import { getSkill } from "../main";
+import { hasSkill } from "../main";
 
 mc.system.runInterval(() => {
   const players = mc.world.getPlayers();
   players.forEach(player =>{
-    let skill = getSkill(player);
-    if (!skill || skill.id !== "rpg_player") return;
+    if (!hasSkill(player, "rpg_player")) return;
     
     let lookingEntity = player.getEntitiesFromViewDirection({maxdistance: 32})[0]?.entity;
     if(!lookingEntity) return;

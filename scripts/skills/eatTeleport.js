@@ -1,10 +1,9 @@
 import * as mc from "@minecraft/server";
-import { getSkill } from "../main";
+import { hasSkill } from "../main";
 
 mc.world.afterEvents.itemCompleteUse.subscribe(data=>{
   if (!data.itemStack.hasTag("minecraft:is_food") && !data.itemStack.hasTag("minecraft:is_food")) return;
-  const skill = getSkill(data.source);
-  if (!skill || skill.id !== "eat_teleport") return;
+  if (!hasSkill(data.source, "eat_teleport")) return;
   const player = data.source;
   const positionIterator = player.dimension.getBlocks(new mc.BlockVolume(
     {x:player.location.x - 16, y:player.location.y + 16, z:player.location.z - 16},

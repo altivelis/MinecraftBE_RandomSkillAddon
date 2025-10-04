@@ -1,12 +1,11 @@
 import * as mc from "@minecraft/server";
-import { getSkill } from "../main";
+import { hasSkill } from "../main";
 
 mc.world.afterEvents.entityHurt.subscribe(data=>{
   const player = data.damageSource.damagingEntity;
   if(!player) return;
   if(!(player instanceof mc.Player)) return;
-  let skill = getSkill(player);
-  if(!skill || skill.id !== "vampire") return;
+  if(!hasSkill(player, "vampire")) return;
   const healthComponent = player.getComponent(mc.EntityHealthComponent.componentId);
   if(!healthComponent) return;
   if(healthComponent.currentValue >= healthComponent.effectiveMax) return; // 満タンならスキップ

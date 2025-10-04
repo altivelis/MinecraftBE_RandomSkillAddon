@@ -1,12 +1,11 @@
 import * as mc from "@minecraft/server";
-import { getSkill } from "../main";
+import { hasSkill } from "../main";
 
 // 範囲回復スキル
 mc.system.runInterval(() => {
   const players = mc.world.getPlayers();
   players.forEach(player =>{
-    let skill = getSkill(player);
-    if (!skill || skill.id !== "area_heal") return;
+    if (!hasSkill(player, "area_heal")) return;
     // 0.25秒ごとに周囲3ブロック以内のプレイヤーを回復する
     const currentTick = mc.system.currentTick;
     if (currentTick % 5 != 0) return;

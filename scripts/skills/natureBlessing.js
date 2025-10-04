@@ -1,11 +1,10 @@
 import * as mc from "@minecraft/server";
-import { getSkill } from "../main";
+import { hasSkill } from "../main";
 
 mc.system.runInterval(() => {
   const radius = mc.world.getDynamicProperty("nature_blessing_radius") || 5;
   const players = mc.world.getPlayers().filter(player => {
-    const skill = getSkill(player);
-    return skill && skill.id === "nature_blessing";
+    return hasSkill(player, "nature_blessing");
   })
   if (players.length === 0) return;
   players.forEach(player => {

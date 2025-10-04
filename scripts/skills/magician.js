@@ -1,9 +1,9 @@
 import * as mc from "@minecraft/server";
-import { getSkill } from "../main";
+import { hasSkill } from "../main";
 
 mc.world.beforeEvents.playerInteractWithEntity.subscribe(data=>{
   const player = data.player;
-  if(!getSkill(player) || getSkill(player).id !== "magician") return;
+  if(!hasSkill(player, "magician")) return;
   mc.system.run(() => {
     while (1) {
       try {

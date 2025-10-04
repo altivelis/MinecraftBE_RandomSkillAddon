@@ -1,12 +1,12 @@
 import * as mc from "@minecraft/server";
-import { getSkill } from "../main";
+import { hasSkill } from "../main";
 
 
 mc.world.afterEvents.entityHitEntity.subscribe(data=>{
   const player = data.damagingEntity;
   if(!(player instanceof mc.Player)) return;
   // スキルが「スーパースマッシュ」のプレイヤーのみを対象とする
-  if(getSkill(player)?.id !== "super_smash") return;
+  if(!hasSkill(player, "super_smash")) return;
   const smashPower = mc.world.getDynamicProperty("superSmashPower");
   const target = data.hitEntity;
   const direction = player.getViewDirection();

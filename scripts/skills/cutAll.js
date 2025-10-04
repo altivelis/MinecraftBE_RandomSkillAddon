@@ -1,10 +1,9 @@
 import * as mc from "@minecraft/server";
-import { getSkill } from "../main";
+import { hasSkill } from "../main";
 
 // 木の原木を一括で破壊する
 mc.world.beforeEvents.playerBreakBlock.subscribe(data => {
-  let skill = getSkill(data.player);
-  if (!skill || skill.id !== "cut_all") return;
+  if (!hasSkill(data.player, "cut_all")) return;
 
   const block = data.block;
   if (!block) return;

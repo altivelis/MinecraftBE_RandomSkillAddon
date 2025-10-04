@@ -1,11 +1,11 @@
 import * as mc from "@minecraft/server";
-import { getSkill } from "../main";
+import { hasSkill } from "../main";
 
 mc.system.runInterval(() => {
   const jumpPower = mc.world.getDynamicProperty("doubleJumpPower") / 10; // デフォルト値を7に設定
   // スキルが2段ジャンプのプレイヤーのみを対象とする
   const players = mc.world.getPlayers().filter(player => {
-    return getSkill(player)?.id == "double_jump";
+    return hasSkill(player, "double_jump");
   });
   // プレイヤーごとに処理を行う
   if (players.length === 0) return; // 対象のプレイヤーがいない場合は処理をスキップ

@@ -1,12 +1,11 @@
 import * as mc from "@minecraft/server";
-import { getSkill } from "../main";
+import { hasSkill } from "../main";
 import { getVectorBetweenEntities } from "./gojoSatoru";
 
 mc.system.runInterval(() => {
   const players = mc.world.getPlayers();
   players.forEach(player =>{
-    let skill = getSkill(player);
-    if (!skill || skill.id !== "magnet_body") return;
+    if (!hasSkill(player, "magnet_body")) return;
     if (!player.isSneaking) return;
     const nearbyEntities = player.dimension.getEntities({location: player.location, maxDistance: mc.world.getDynamicProperty("magnet_body_radius") || 5});
     nearbyEntities.forEach(entity => {

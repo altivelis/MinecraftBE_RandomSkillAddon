@@ -1,11 +1,10 @@
 import * as mc from "@minecraft/server";
-import { getSkill } from "../main";
+import { hasSkill } from "../main";
 
 mc.system.runInterval(() => {
   let power = mc.world.getDynamicProperty("satoruLength") || 3;
   mc.world.getPlayers().filter(player => {
-    const skill = getSkill(player);
-    return skill && skill.id === "gojo_satoru";
+    return hasSkill(player, "gojo_satoru");
   }).forEach(player => {
     // プレイヤーが「無下限呪術」スキルを持っている場合の処理
     const nearbyEntities = player.dimension.getEntities({location: player.location, maxDistance: power});

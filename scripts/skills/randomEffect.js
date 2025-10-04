@@ -1,9 +1,9 @@
 import * as mc from "@minecraft/server";
-import { getSkill } from "../main";
+import { hasSkill } from "../main";
 
 mc.system.runInterval(() => {
   const players = mc.world.getPlayers().filter(player=>{
-    return getSkill(player)?.id == "random_effect";
+    return hasSkill(player, "random_effect");
   });
   if (players.length === 0) return; // 対象のプレイヤーがいない場合は処理をスキップ
   const effects = mc.EffectTypes.getAll();

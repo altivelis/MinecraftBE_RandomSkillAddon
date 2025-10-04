@@ -1,8 +1,8 @@
 import * as mc from "@minecraft/server";
-import { getSkill } from "../main";
+import { hasSkill } from "../main";
 
 mc.world.afterEvents.playerBreakBlock.subscribe(data=>{
-  if (!getSkill(data.player) || getSkill(data.player).id !== "random_drop") return;
+  if (!hasSkill(data.player, "random_drop")) return;
   /**
    * @param {mc.EntitySpawnAfterEvent} data2 
    * @returns {void}

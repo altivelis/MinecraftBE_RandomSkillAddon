@@ -1,10 +1,9 @@
 import * as mc from "@minecraft/server";
-import { getSkill } from "../main";
+import { hasSkill } from "../main";
 
 mc.system.runInterval(()=>{
   const players = mc.world.getPlayers().filter(player=>{
-    const skill = getSkill(player);
-    return skill && skill.id === "charge_jump";
+    return hasSkill(player, "charge_jump");
   })
   if (players.length === 0) return;
 

@@ -25,14 +25,17 @@ mc.system.beforeEvents.startup.subscribe(data => {
     (origin, player) => {
     if (player === undefined) {
       if (origin.sourceEntity instanceof mc.Player) {
-        let skillInfo = getSkill(origin.sourceEntity);
-        if (!skillInfo) {
+        let skills = getSkill(origin.sourceEntity);
+        if (!skills) {
           return {
             status: mc.CustomCommandStatus.Failure,
             message: "スキル情報が見つかりませんでした。"
           }
         }
-        let text = `${origin.sourceEntity.nameTag}: §a${skillInfo.name}§r\n${skillInfo.description}`;
+        let text = `${origin.sourceEntity.nameTag}のスキル:\n`;
+        skills.forEach((skill, i) => {
+          text += `${i + 1}. §a${skill.name}§r - ${skill.description}\n`;
+        });
         return {
           status: mc.CustomCommandStatus.Success,
           message: text
@@ -52,11 +55,15 @@ mc.system.beforeEvents.startup.subscribe(data => {
     } else {
       let textList = [];
       for (const target of player) {
-        let skillInfo = getSkill(target);
-        if (!skillInfo) {
+        let skills = getSkill(target);
+        if (!skills) {
           textList.push(`${target.nameTag}: スキル情報が見つかりませんでした。`);
         } else {
-          textList.push(`${target.nameTag}: §a${skillInfo.name}§r\n${skillInfo.description}`);
+          let text = `${target.nameTag}のスキル:\n`;
+          skills.forEach((skill, i) => {
+            text += `  ${i + 1}. §a${skill.name}§r - ${skill.description}\n`;
+          });
+          textList.push(text);
         }
       }
       return {

@@ -1,5 +1,5 @@
 import * as mc from "@minecraft/server";
-import { getSkill } from "../main";
+import { hasSkill } from "../main";
 
 mc.world.afterEvents.entitySpawn.subscribe(data => {
   if(data.entity.typeId !== "minecraft:item") return;
@@ -13,7 +13,7 @@ mc.world.afterEvents.entitySpawn.subscribe(data => {
   let process = (data2) => {
     if (data2.deadEntity.typeId == "minecraft:player") return;
     const player = data2.damageSource.damagingEntity;
-    if(!player || !(player instanceof mc.Player) || !getSkill(player) || getSkill(player).id !== "random_loot") return;
+    if(!player || !(player instanceof mc.Player) || !hasSkill(player, "random_loot")) return;
     if (data2.deadEntity.dimension.id != data.entity.dimension.id) return;
     // if (Math.floor(data2.deadEntity.location.x) != Math.floor(data.entity.location.x)) return;
     // if (Math.floor(data2.deadEntity.location.y) != Math.floor(data.entity.location.y)) return;

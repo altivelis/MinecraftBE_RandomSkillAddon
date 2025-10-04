@@ -1,10 +1,10 @@
 import * as mc from "@minecraft/server";
-import { getSkill } from "../main";
+import { hasSkill } from "../main";
 
 mc.system.runInterval(() => {
-  const players = mc.world.getPlayers().filter(player=>{
-    return getSkill(player)?.id == "strong_smell";
-  })
+  const players = mc.world.getPlayers().filter(player => {
+    return hasSkill(player, "strong_smell");
+  });
   if (players.length === 0) return; // 対象のプレイヤーがいない場合は処理をスキップ
   players.forEach(player=>{
     // プレイヤーの周囲にいるモブを取得
