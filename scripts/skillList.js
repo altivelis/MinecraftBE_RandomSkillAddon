@@ -123,5 +123,10 @@ export const skillList = [
     id: "potion_hand",
     name: "ポーションハンド",
     description: "攻撃するとランダムなポーション効果を与える。"
+  },
+  {
+    id: "fire_master",
+    name: "炎の使い手",
+    description: "攻撃した相手を燃やし、投擲物に火属性が付く。"
   }
 ]
