@@ -133,5 +133,10 @@ export const skillList = [
     id: "sprinter",
     name: "加速",
     description: "走り続けると加速し、その状態でジャンプすると高く飛ぶ。"
+  },
+  {
+    id: "mermaid",
+    name: "人魚の加護",
+    description: "水中で様々な恩恵を受ける。"
   }
 ]
