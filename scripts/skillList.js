@@ -127,6 +127,11 @@ export const skillList = [
   {
     id: "fire_master",
     name: "炎の使い手",
-    description: "攻撃した相手を燃やし、投擲物に火属性が付く。"
+    description: "攻撃した相手を燃やし、投擲物が燃え上がる。"
+  },
+  {
+    id: "sprinter",
+    name: "加速",
+    description: "走り続けると加速し、その状態でジャンプすると高く飛ぶ。"
   }
 ]

@@ -36,6 +36,7 @@ import "./scope";
 import "./magnetBody";
 import "./potionHand";
 import "./fireMaster";
+import "./sprinter";
 
 // 新しいスキルの例：
 // import "./newSkillName";
